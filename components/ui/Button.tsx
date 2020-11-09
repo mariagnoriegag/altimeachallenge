@@ -7,8 +7,19 @@ interface ButtonProps {
     rightIcon?: React.ReactElement;
 }
 
-const Button: React.FC<ButtonProps> = ({ children }: ButtonProps) => {
-    return <button>{children}</button>;
+const Button: React.FC<ButtonProps> = ({
+    onClick,
+    leftIcon,
+    rightIcon,
+    children,
+}: ButtonProps) => {
+    return (
+        <button onClick={onClick} type="button">
+            <div>{leftIcon}</div>
+            <div>{children}</div>
+            <div>{rightIcon}</div>
+        </button>
+    );
 };
 
 export default Button;

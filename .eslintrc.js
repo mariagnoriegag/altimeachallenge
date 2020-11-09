@@ -5,5 +5,7 @@ module.exports = {
         "react/require-default-props": "off",
         "no-nested-ternary": "off",
         "react/jsx-props-no-spreading": "off",
-    },
+        "camelcase": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+    }
 };

@@ -9,7 +9,8 @@ import Document, {
 
 class ADocument extends Document {
     static async getInitialProps(ctx: DocumentContext) {
-        return await Document.getInitialProps(ctx);
+        const x = await Document.getInitialProps(ctx);
+        return x;
     }
 
     render() {

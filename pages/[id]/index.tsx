@@ -1,6 +1,6 @@
+import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { useRouter } from "next/router";
-import React from "react";
 
 const Country: NextPage = () => {
     const router = useRouter();

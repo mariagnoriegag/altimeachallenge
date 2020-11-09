@@ -1,5 +1,6 @@
+import React from "react";
 import Head from "next/head";
-import { NextPage, NextPageContext } from "next";
+import { NextPage } from "next";
 
 const Home: NextPage = () => {
     return (
@@ -21,12 +22,5 @@ const Home: NextPage = () => {
         </div>
     );
 };
-
-export async function getServerSideProps(context: NextPageContext) {
-    // context.req.
-    return {
-        props: {}, // will be passed to the page component as props
-    };
-}
 
 export default Home;
