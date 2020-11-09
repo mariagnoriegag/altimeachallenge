@@ -1,0 +1,8 @@
+query Countries($alpha2Code: String, $name: String) {
+    Country(alpha2Code: $alpha2Code, name: $name) {
+        _id
+        name
+        nativeName
+        alpha2Code
+    }
+}

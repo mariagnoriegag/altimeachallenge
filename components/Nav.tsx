@@ -12,18 +12,18 @@ const Nav: FC = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/SSR">
-                        <div>SSR</div>
+                    <Link href="/1">
+                        <div>1</div>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/StyledJsx">
-                        <div>Styled Jsx</div>
+                    <Link href="/3">
+                        <div>3</div>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/ModuleCss">
-                        <div>Module CSS</div>
+                    <Link href="/other">
+                        <div>Other</div>
                     </Link>
                 </li>
             </ul>

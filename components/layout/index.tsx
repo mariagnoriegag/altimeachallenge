@@ -1,16 +1,27 @@
-// import { useRouter } from "next/router";
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, useEffect } from "react";
 import Head from "next/head";
 import Header from "../Header";
 import Footer from "../Footer";
+import LayoutState from "../../lib/globalstate";
 
 interface LayoutProps {
     title: string;
+    loading?: boolean;
+    error?: string | any;
     children: FC | ReactElement | ReactElement[] | Element[] | FC[];
 }
 
-const Layout: FC<LayoutProps> = ({ title, children }: LayoutProps) => {
-    // const router = useRouter();
+const Layout: FC<LayoutProps> = ({
+    title,
+    loading,
+    error,
+    children,
+}: LayoutProps) => {
+    const { setLoading } = LayoutState.useContainer();
+
+    useEffect(() => {
+        if (loading !== undefined) setLoading(loading);
+    }, [loading]);
 
     return (
         <div>
@@ -22,9 +33,10 @@ const Layout: FC<LayoutProps> = ({ title, children }: LayoutProps) => {
                     content="width=device-width, initial-scale=1, shrink-to-fit=no"
                 />
             </Head>
+            <div>{loading && "Cargando ..."}</div>
             <Header title={title} />
             <main>{children}</main>
-            <Footer />
+            <Footer>{error && error.name}</Footer>
         </div>
     );
 };

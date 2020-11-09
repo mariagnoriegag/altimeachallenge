@@ -1,0 +1,13 @@
+query FilterCurrency($id: String, $filter: _CurrencyFilter) {
+    Currency(_id: $id, filter: $filter) {
+        name
+        code
+        symbol
+        countries {
+            _id
+            name
+            nativeName
+            alpha2Code
+        }
+    }
+}

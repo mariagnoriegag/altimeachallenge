@@ -1,0 +1,8 @@
+query Currencies($id: String, $filter: _CurrencyFilter) {
+    Currency(_id: $id, filter: $filter) {
+        _id
+        name
+        code
+        symbol
+    }
+}

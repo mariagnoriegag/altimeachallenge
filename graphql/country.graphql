@@ -1,15 +1,11 @@
-query CountryList($id: String) {
+query Country($id: String) {
     Country(_id: $id) {
         name
         nativeName
         alpha2Code
-        alpha3Code
         area
         population
-        populationDensity
         capital
-        demonym
-        gini
         location {
             latitude
             longitude
@@ -31,23 +27,10 @@ query CountryList($id: String) {
             name
             symbol
         }
-        regionalBlocs {
-            name
-            acronym
-            otherAcronyms {
-                name
-            }
-            otherNames {
-                name
-            }
-        }
         flag {
             emoji
             emojiUnicode
             svgFile
-        }
-        topLevelDomains {
-            name
         }
         callingCodes {
             name

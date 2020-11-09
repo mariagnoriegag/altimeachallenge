@@ -1,0 +1,13 @@
+query FilterRegion($id: String, $filter: _RegionFilter) {
+    Region(_id: $id, filter: $filter) {
+        subregions {
+            name
+            countries {
+                _id
+                name
+                nativeName
+                alpha2Code
+            }
+        }
+    }
+}

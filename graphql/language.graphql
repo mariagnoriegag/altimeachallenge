@@ -1,0 +1,12 @@
+query FilterLanguage($id: String, $filter: _LanguageFilter) {
+    Language(_id: $id, filter: $filter) {
+        name
+        nativeName
+        countries {
+            _id
+            name
+            nativeName
+            alpha2Code
+        }
+    }
+}

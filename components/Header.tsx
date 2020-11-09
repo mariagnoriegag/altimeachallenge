@@ -8,8 +8,8 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = ({ title }: HeaderProps) => {
     return (
         <div>
-            <h2>{title}</h2>
             <Nav />
+            <h1>{title}</h1>
         </div>
     );
 };

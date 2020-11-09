@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
 import * as React from "react";
 import * as Urql from "urql";
-
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = {
     [K in keyof T]: T[K];
@@ -1313,11 +1312,29 @@ export enum _RelationDirections {
     Out = "OUT",
 }
 
-export type CountryListQueryVariables = Exact<{
+export type CountriesQueryVariables = Exact<{
+    alpha2Code?: Maybe<Scalars["String"]>;
+    name?: Maybe<Scalars["String"]>;
+}>;
+
+export type CountriesQuery = { __typename?: "Query" } & {
+    Country?: Maybe<
+        Array<
+            Maybe<
+                { __typename?: "Country" } & Pick<
+                    Country,
+                    "_id" | "name" | "nativeName" | "alpha2Code"
+                >
+            >
+        >
+    >;
+};
+
+export type CountryQueryVariables = Exact<{
     id?: Maybe<Scalars["String"]>;
 }>;
 
-export type CountryListQuery = { __typename?: "Query" } & {
+export type CountryQuery = { __typename?: "Query" } & {
     Country?: Maybe<
         Array<
             Maybe<
@@ -1326,13 +1343,9 @@ export type CountryListQuery = { __typename?: "Query" } & {
                     | "name"
                     | "nativeName"
                     | "alpha2Code"
-                    | "alpha3Code"
                     | "area"
                     | "population"
-                    | "populationDensity"
                     | "capital"
-                    | "demonym"
-                    | "gini"
                     | "numericCode"
                 > & {
                         location: { __typename?: "_Neo4jPoint" } & Pick<
@@ -1375,55 +1388,10 @@ export type CountryListQuery = { __typename?: "Query" } & {
                                 >
                             >
                         >;
-                        regionalBlocs?: Maybe<
-                            Array<
-                                Maybe<
-                                    { __typename?: "RegionalBloc" } & Pick<
-                                        RegionalBloc,
-                                        "name" | "acronym"
-                                    > & {
-                                            otherAcronyms?: Maybe<
-                                                Array<
-                                                    Maybe<
-                                                        {
-                                                            __typename?: "OtherAcronym";
-                                                        } & Pick<
-                                                            OtherAcronym,
-                                                            "name"
-                                                        >
-                                                    >
-                                                >
-                                            >;
-                                            otherNames?: Maybe<
-                                                Array<
-                                                    Maybe<
-                                                        {
-                                                            __typename?: "OtherName";
-                                                        } & Pick<
-                                                            OtherName,
-                                                            "name"
-                                                        >
-                                                    >
-                                                >
-                                            >;
-                                        }
-                                >
-                            >
-                        >;
                         flag?: Maybe<
                             { __typename?: "Flag" } & Pick<
                                 Flag,
                                 "emoji" | "emojiUnicode" | "svgFile"
-                            >
-                        >;
-                        topLevelDomains?: Maybe<
-                            Array<
-                                Maybe<
-                                    { __typename?: "TopLevelDomain" } & Pick<
-                                        TopLevelDomain,
-                                        "name"
-                                    >
-                                >
                             >
                         >;
                         callingCodes?: Maybe<
@@ -1451,19 +1419,188 @@ export type CountryListQuery = { __typename?: "Query" } & {
     >;
 };
 
-export const CountryListDocument = gql`
-    query CountryList($id: String) {
+export type CurrenciesQueryVariables = Exact<{
+    id?: Maybe<Scalars["String"]>;
+    filter?: Maybe<_CurrencyFilter>;
+}>;
+
+export type CurrenciesQuery = { __typename?: "Query" } & {
+    Currency?: Maybe<
+        Array<
+            Maybe<
+                { __typename?: "Currency" } & Pick<
+                    Currency,
+                    "_id" | "name" | "code" | "symbol"
+                >
+            >
+        >
+    >;
+};
+
+export type FilterCurrencyQueryVariables = Exact<{
+    id?: Maybe<Scalars["String"]>;
+    filter?: Maybe<_CurrencyFilter>;
+}>;
+
+export type FilterCurrencyQuery = { __typename?: "Query" } & {
+    Currency?: Maybe<
+        Array<
+            Maybe<
+                { __typename?: "Currency" } & Pick<
+                    Currency,
+                    "name" | "code" | "symbol"
+                > & {
+                        countries?: Maybe<
+                            Array<
+                                Maybe<
+                                    { __typename?: "Country" } & Pick<
+                                        Country,
+                                        | "_id"
+                                        | "name"
+                                        | "nativeName"
+                                        | "alpha2Code"
+                                    >
+                                >
+                            >
+                        >;
+                    }
+            >
+        >
+    >;
+};
+
+export type FilterLanguageQueryVariables = Exact<{
+    id?: Maybe<Scalars["String"]>;
+    filter?: Maybe<_LanguageFilter>;
+}>;
+
+export type FilterLanguageQuery = { __typename?: "Query" } & {
+    Language?: Maybe<
+        Array<
+            Maybe<
+                { __typename?: "Language" } & Pick<
+                    Language,
+                    "name" | "nativeName"
+                > & {
+                        countries?: Maybe<
+                            Array<
+                                Maybe<
+                                    { __typename?: "Country" } & Pick<
+                                        Country,
+                                        | "_id"
+                                        | "name"
+                                        | "nativeName"
+                                        | "alpha2Code"
+                                    >
+                                >
+                            >
+                        >;
+                    }
+            >
+        >
+    >;
+};
+
+export type LanguagesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type LanguagesQuery = { __typename?: "Query" } & {
+    Language?: Maybe<
+        Array<
+            Maybe<
+                { __typename?: "Language" } & Pick<
+                    Language,
+                    "_id" | "name" | "nativeName"
+                >
+            >
+        >
+    >;
+};
+
+export type FilterRegionQueryVariables = Exact<{
+    id?: Maybe<Scalars["String"]>;
+    filter?: Maybe<_RegionFilter>;
+}>;
+
+export type FilterRegionQuery = { __typename?: "Query" } & {
+    Region?: Maybe<
+        Array<
+            Maybe<
+                { __typename?: "Region" } & {
+                    subregions?: Maybe<
+                        Array<
+                            Maybe<
+                                { __typename?: "Subregion" } & Pick<
+                                    Subregion,
+                                    "name"
+                                > & {
+                                        countries?: Maybe<
+                                            Array<
+                                                Maybe<
+                                                    {
+                                                        __typename?: "Country";
+                                                    } & Pick<
+                                                        Country,
+                                                        | "_id"
+                                                        | "name"
+                                                        | "nativeName"
+                                                        | "alpha2Code"
+                                                    >
+                                                >
+                                            >
+                                        >;
+                                    }
+                            >
+                        >
+                    >;
+                }
+            >
+        >
+    >;
+};
+
+export type RegionsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type RegionsQuery = { __typename?: "Query" } & {
+    Region?: Maybe<
+        Array<Maybe<{ __typename?: "Region" } & Pick<Region, "_id" | "name">>>
+    >;
+};
+
+export const CountriesDocument = gql`
+    query Countries($alpha2Code: String, $name: String) {
+        Country(alpha2Code: $alpha2Code, name: $name) {
+            _id
+            name
+            nativeName
+            alpha2Code
+        }
+    }
+`;
+
+export const CountriesComponent = (
+    props: Omit<
+        Urql.QueryProps<CountriesQuery, CountriesQueryVariables>,
+        "query"
+    > & { variables?: CountriesQueryVariables }
+) => <Urql.Query {...props} query={CountriesDocument} />;
+
+export function useCountriesQuery(
+    options: Omit<Urql.UseQueryArgs<CountriesQueryVariables>, "query"> = {}
+) {
+    return Urql.useQuery<CountriesQuery>({
+        query: CountriesDocument,
+        ...options,
+    });
+}
+export const CountryDocument = gql`
+    query Country($id: String) {
         Country(_id: $id) {
             name
             nativeName
             alpha2Code
-            alpha3Code
             area
             population
-            populationDensity
             capital
-            demonym
-            gini
             location {
                 latitude
                 longitude
@@ -1485,23 +1622,10 @@ export const CountryListDocument = gql`
                 name
                 symbol
             }
-            regionalBlocs {
-                name
-                acronym
-                otherAcronyms {
-                    name
-                }
-                otherNames {
-                    name
-                }
-            }
             flag {
                 emoji
                 emojiUnicode
                 svgFile
-            }
-            topLevelDomains {
-                name
             }
             callingCodes {
                 name
@@ -1513,18 +1637,179 @@ export const CountryListDocument = gql`
     }
 `;
 
-export const CountryListComponent = (
+export const CountryComponent = (
     props: Omit<
-        Urql.QueryProps<CountryListQuery, CountryListQueryVariables>,
+        Urql.QueryProps<CountryQuery, CountryQueryVariables>,
         "query"
-    > & { variables?: CountryListQueryVariables }
-) => <Urql.Query {...props} query={CountryListDocument} />;
+    > & { variables?: CountryQueryVariables }
+) => <Urql.Query {...props} query={CountryDocument} />;
 
-export function useCountryListQuery(
-    options: Omit<Urql.UseQueryArgs<CountryListQueryVariables>, "query"> = {}
+export function useCountryQuery(
+    options: Omit<Urql.UseQueryArgs<CountryQueryVariables>, "query"> = {}
 ) {
-    return Urql.useQuery<CountryListQuery>({
-        query: CountryListDocument,
+    return Urql.useQuery<CountryQuery>({ query: CountryDocument, ...options });
+}
+export const CurrenciesDocument = gql`
+    query Currencies($id: String, $filter: _CurrencyFilter) {
+        Currency(_id: $id, filter: $filter) {
+            _id
+            name
+            code
+            symbol
+        }
+    }
+`;
+
+export const CurrenciesComponent = (
+    props: Omit<
+        Urql.QueryProps<CurrenciesQuery, CurrenciesQueryVariables>,
+        "query"
+    > & { variables?: CurrenciesQueryVariables }
+) => <Urql.Query {...props} query={CurrenciesDocument} />;
+
+export function useCurrenciesQuery(
+    options: Omit<Urql.UseQueryArgs<CurrenciesQueryVariables>, "query"> = {}
+) {
+    return Urql.useQuery<CurrenciesQuery>({
+        query: CurrenciesDocument,
         ...options,
     });
+}
+export const FilterCurrencyDocument = gql`
+    query FilterCurrency($id: String, $filter: _CurrencyFilter) {
+        Currency(_id: $id, filter: $filter) {
+            name
+            code
+            symbol
+            countries {
+                _id
+                name
+                nativeName
+                alpha2Code
+            }
+        }
+    }
+`;
+
+export const FilterCurrencyComponent = (
+    props: Omit<
+        Urql.QueryProps<FilterCurrencyQuery, FilterCurrencyQueryVariables>,
+        "query"
+    > & { variables?: FilterCurrencyQueryVariables }
+) => <Urql.Query {...props} query={FilterCurrencyDocument} />;
+
+export function useFilterCurrencyQuery(
+    options: Omit<Urql.UseQueryArgs<FilterCurrencyQueryVariables>, "query"> = {}
+) {
+    return Urql.useQuery<FilterCurrencyQuery>({
+        query: FilterCurrencyDocument,
+        ...options,
+    });
+}
+export const FilterLanguageDocument = gql`
+    query FilterLanguage($id: String, $filter: _LanguageFilter) {
+        Language(_id: $id, filter: $filter) {
+            name
+            nativeName
+            countries {
+                _id
+                name
+                nativeName
+                alpha2Code
+            }
+        }
+    }
+`;
+
+export const FilterLanguageComponent = (
+    props: Omit<
+        Urql.QueryProps<FilterLanguageQuery, FilterLanguageQueryVariables>,
+        "query"
+    > & { variables?: FilterLanguageQueryVariables }
+) => <Urql.Query {...props} query={FilterLanguageDocument} />;
+
+export function useFilterLanguageQuery(
+    options: Omit<Urql.UseQueryArgs<FilterLanguageQueryVariables>, "query"> = {}
+) {
+    return Urql.useQuery<FilterLanguageQuery>({
+        query: FilterLanguageDocument,
+        ...options,
+    });
+}
+export const LanguagesDocument = gql`
+    query Languages {
+        Language {
+            _id
+            name
+            nativeName
+        }
+    }
+`;
+
+export const LanguagesComponent = (
+    props: Omit<
+        Urql.QueryProps<LanguagesQuery, LanguagesQueryVariables>,
+        "query"
+    > & { variables?: LanguagesQueryVariables }
+) => <Urql.Query {...props} query={LanguagesDocument} />;
+
+export function useLanguagesQuery(
+    options: Omit<Urql.UseQueryArgs<LanguagesQueryVariables>, "query"> = {}
+) {
+    return Urql.useQuery<LanguagesQuery>({
+        query: LanguagesDocument,
+        ...options,
+    });
+}
+export const FilterRegionDocument = gql`
+    query FilterRegion($id: String, $filter: _RegionFilter) {
+        Region(_id: $id, filter: $filter) {
+            subregions {
+                name
+                countries {
+                    _id
+                    name
+                    nativeName
+                    alpha2Code
+                }
+            }
+        }
+    }
+`;
+
+export const FilterRegionComponent = (
+    props: Omit<
+        Urql.QueryProps<FilterRegionQuery, FilterRegionQueryVariables>,
+        "query"
+    > & { variables?: FilterRegionQueryVariables }
+) => <Urql.Query {...props} query={FilterRegionDocument} />;
+
+export function useFilterRegionQuery(
+    options: Omit<Urql.UseQueryArgs<FilterRegionQueryVariables>, "query"> = {}
+) {
+    return Urql.useQuery<FilterRegionQuery>({
+        query: FilterRegionDocument,
+        ...options,
+    });
+}
+export const RegionsDocument = gql`
+    query Regions {
+        Region {
+            _id
+            name
+        }
+    }
+`;
+
+export const RegionsComponent = (
+    props: Omit<
+        Urql.QueryProps<RegionsQuery, RegionsQueryVariables>,
+        "query"
+    > & { variables?: RegionsQueryVariables }
+) => <Urql.Query {...props} query={RegionsDocument} />;
+
+export function useRegionsQuery(
+    options: Omit<Urql.UseQueryArgs<RegionsQueryVariables>, "query"> = {}
+) {
+    return Urql.useQuery<RegionsQuery>({ query: RegionsDocument, ...options });
 }
