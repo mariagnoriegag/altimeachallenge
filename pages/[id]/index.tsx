@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/layout";
 import { AltimeaPage } from "../../lib/altimea";
 import { useCountryQuery } from "../../integration/graphql";
+import { Box, Text } from "@chakra-ui/core";
 
 const Country: AltimeaPage = ({
     id,
@@ -19,18 +20,19 @@ const Country: AltimeaPage = ({
                 !data
                     ? id
                     : !error
-                    ? !data.Country[0] ? "No existe en la base de datos"
-                    : `${data.Country[0].flag.emoji} ${data.Country[0].name}` : "No se encontró"
+                    ? !data.Country[0]
+                        ? "No existe en la base de datos"
+                        : `${data.Country[0].flag.emoji} ${data.Country[0].name}`
+                    : "No se encontró"
             }
             loading={fetching}
             error={error}
         >
-            <p>{!data ? id : !error ? !data.Country[0] ? "" : data.Country[0].name : ""}</p>
             {!error && !!data && !!data.Country[0] && (
-                <div>
-                    <div>Native name: {data.Country[0].nativeName}</div>
-                    <div>Alpha2Code: {data.Country[0].alpha2Code}</div>
-                    <div>
+                <Box py={4}>
+                    <Text>Native name: {data.Country[0].nativeName}</Text>
+                    <Text>Alpha2Code: {data.Country[0].alpha2Code}</Text>
+                    <Text>
                         Alternative spellings:{" "}
                         {data.Country[0]["alternativeSpellings"].map(
                             (spelling, i) => (
@@ -42,58 +44,58 @@ const Country: AltimeaPage = ({
                                 </span>
                             )
                         )}
-                    </div>
-                    <div>Area: {data.Country[0].area} Km2</div>
-                    <div>
+                    </Text>
+                    <Text>Area: {data.Country[0].area} Km2</Text>
+                    <Text>
                         Population: {data.Country[0].population / 1000000}{" "}
                         millones
-                    </div>
-                    <div>Capital: {data.Country[0].capital}</div>
-                    <div>
+                    </Text>
+                    <Text>Capital: {data.Country[0].capital}</Text>
+                    <Text>
                         Location:
-                        <div style={{ marginLeft: 20 }}>
-                            <div>
+                        <Text style={{ marginLeft: 20 }}>
+                            <Text>
                                 Latitude: {data.Country[0].location.latitude}
-                            </div>
-                            <div>
+                            </Text>
+                            <Text>
                                 Longitude: {data.Country[0].location.longitude}
-                            </div>
-                        </div>
-                    </div>
-                    <div>Numeric code: {data.Country[0].numericCode}</div>
-                    <div>Subregion: {data.Country[0].subregion.name}</div>
-                    <div>Region: {data.Country[0].subregion.region.name}</div>
-                    <div>
+                            </Text>
+                        </Text>
+                    </Text>
+                    <Text>Numeric code: {data.Country[0].numericCode}</Text>
+                    <Text>Subregion: {data.Country[0].subregion.name}</Text>
+                    <Text>Region: {data.Country[0].subregion.region.name}</Text>
+                    <Text>
                         Currencies:
                         {data.Country[0]["currencies"].map((currency, i) => (
-                            <div key={i} style={{ marginLeft: 20 }}>
-                                <div>
+                            <Text key={i} style={{ marginLeft: 20 }}>
+                                <Text>
                                     {currency.name} | {currency.symbol}
-                                </div>
-                            </div>
+                                </Text>
+                            </Text>
                         ))}
-                    </div>
-                    <div>
+                    </Text>
+                    <Text>
                         Official Languages:
                         {data.Country[0]["officialLanguages"].map(
                             (language, i) => (
-                                <div key={i} style={{ marginLeft: 20 }}>
-                                    <div>
+                                <Text key={i} style={{ marginLeft: 20 }}>
+                                    <Text>
                                         {language.name} | {language.nativeName}
-                                    </div>
-                                </div>
+                                    </Text>
+                                </Text>
                             )
                         )}
-                    </div>
-                    <div>
+                    </Text>
+                    <Text>
                         Calling codes:
                         {data.Country[0]["callingCodes"].map((code, i) => (
-                            <div key={i} style={{ marginLeft: 20 }}>
-                                <div>{code.name}</div>
-                            </div>
+                            <Text key={i} style={{ marginLeft: 20 }}>
+                                <Text>{code.name}</Text>
+                            </Text>
                         ))}
-                    </div>
-                </div>
+                    </Text>
+                </Box>
             )}
         </Layout>
     );

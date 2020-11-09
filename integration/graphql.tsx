@@ -1324,7 +1324,11 @@ export type CountriesQuery = { __typename?: "Query" } & {
                 { __typename?: "Country" } & Pick<
                     Country,
                     "_id" | "name" | "nativeName" | "alpha2Code"
-                >
+                > & {
+                        flag?: Maybe<
+                            { __typename?: "Flag" } & Pick<Flag, "emoji">
+                        >;
+                    }
             >
         >
     >;
@@ -1573,6 +1577,9 @@ export const CountriesDocument = gql`
             name
             nativeName
             alpha2Code
+            flag {
+                emoji
+            }
         }
     }
 `;

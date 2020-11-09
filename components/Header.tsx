@@ -1,5 +1,5 @@
+import { Text } from "@chakra-ui/core";
 import React, { FC } from "react";
-import Nav from "./Nav";
 
 interface HeaderProps {
     title?: string;
@@ -7,10 +7,9 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ title }: HeaderProps) => {
     return (
-        <div>
-            <Nav />
-            <h1>{title}</h1>
-        </div>
+        <Text as="h2" textStyle="h2">
+            {title}
+        </Text>
     );
 };
 

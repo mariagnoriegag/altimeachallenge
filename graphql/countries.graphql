@@ -4,5 +4,8 @@ query Countries($alpha2Code: String, $name: String) {
         name
         nativeName
         alpha2Code
+        flag {
+            emoji
+        }
     }
 }

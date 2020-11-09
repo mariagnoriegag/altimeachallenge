@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 interface FooterProps {
     children: React.ReactElement | Element | string;
@@ -7,7 +7,6 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ children }: FooterProps) => {
     return (
         <footer>
-            <h2>footer</h2>
             {children && (
                 <>
                     <div>Error: </div>
