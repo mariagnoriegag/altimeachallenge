@@ -4,11 +4,11 @@ import React from "react";
 
 const Country: NextPage = () => {
     const router = useRouter();
-    const { oid } = router.query;
+    const { id } = router.query;
 
     return (
         <div>
-            <p>Organization ID: {oid}</p>
+            <p>Country ID: {id}</p>
         </div>
     );
 };
