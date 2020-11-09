@@ -1,10 +1,9 @@
 import Head from "next/head";
 import { NextPage, NextPageContext } from "next";
-import { jsx } from "theme-ui";
 
 const Home: NextPage = () => {
     return (
-        <div sx={{ backgroundColor: "primary", color: "#fff", p: 4 }}>
+        <div>
             <Head>
                 <title>Países</title>
                 <link rel="icon" href="/favicon.ico" />
