@@ -1,15 +1,16 @@
 import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { useRouter } from "next/router";
+import Layout from "../../components/layout";
 
 const Country: NextPage = () => {
     const router = useRouter();
     const { id } = router.query;
 
     return (
-        <div>
+        <Layout title={id.toString()}>
             <p>Country ID: {id}</p>
-        </div>
+        </Layout>
     );
 };
 
