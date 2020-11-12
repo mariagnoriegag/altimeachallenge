@@ -11,19 +11,13 @@ import {
     IconButton,
     Input,
     InputGroup,
-    InputLeftElement,
+    InputRightElement,
     Select,
     Text,
     useColorMode,
 } from "@chakra-ui/core";
-import {
-    ArrowRightIcon,
-    ArrowUpDownIcon,
-    ChevronRightIcon,
-    Search2Icon,
-    SearchIcon,
-} from "@chakra-ui/icons";
 import { Currency, Language, Region } from "../../integration/graphql";
+import { SearchIcon } from "../icons";
 
 interface LayoutProps {
     title: string;
@@ -32,6 +26,7 @@ interface LayoutProps {
     languages?: Language[];
     currencies?: Currency[];
     regions?: Region[];
+    getSearchItem?: (name: string) => void;
     children: FC | ReactElement | ReactElement[] | Element[] | FC[];
 }
 
@@ -40,6 +35,7 @@ const Layout: FC<LayoutProps> = ({
     loading,
     error,
     children,
+    getSearchItem,
     languages,
     currencies,
     regions,
@@ -102,18 +98,20 @@ const Layout: FC<LayoutProps> = ({
                 />
             </HStack>
             <Flex gridColumnGap={4} mb={6}>
-                <InputGroup>
-                    <InputLeftElement
-                        pointerEvents="none"
-                        children={<SearchIcon color="gray.300" />}
-                    />
-                    <Input type="text" placeholder="Search country" />
-                </InputGroup>
                 <IconButton
-                    icon={<Search2Icon />}
+                    icon={<SearchIcon />}
                     isLoading={loading}
-                    colorScheme="teal"
+                    colorScheme="blue"
+                    aria-label="button"
                 />
+                <InputGroup>
+                    <Input
+                        px={4}
+                        type="text"
+                        placeholder="Search country"
+                        onChange={(e) => getSearchItem(e.target.value)}
+                    />
+                </InputGroup>
             </Flex>
 
             <Header title={title} />
