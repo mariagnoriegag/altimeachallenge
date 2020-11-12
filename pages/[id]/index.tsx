@@ -59,13 +59,12 @@ const Country: AltimeaPage = ({
                 )}
                 <Box>
                     <Button
-                        onClick={() => router.push("")}
+                        onClick={() => router.push("/")}
                         variant="outline"
                         type="button"
                         my={4}
                         size="sm"
                     >
-                        {" "}
                         &#x2190; Back to all countries list
                     </Button>
                     <Header
