@@ -88,7 +88,7 @@ const Layout: FC<LayoutProps> = ({
                     Maria Noriega
                 </Text>
                 <Button onClick={toggleColorMode} colorScheme="teal">
-                    Toggle {colorMode === "light" ? "Dark" : "Light"}
+                    {colorMode === "light" ? "Dark" : "Light"}
                 </Button>
             </Flex>
             <HStack my={4}>
