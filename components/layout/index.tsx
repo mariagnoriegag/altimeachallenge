@@ -11,44 +11,68 @@ import {
     IconButton,
     Input,
     InputGroup,
-    InputRightElement,
     Select,
     Text,
     useColorMode,
 } from "@chakra-ui/core";
-import { Currency, Language, Region } from "../../integration/graphql";
+import {
+    CountriesQuery,
+    useCountriesQuery,
+    useCurrenciesQuery,
+    useLanguagesQuery,
+    useRegionsQuery,
+} from "../../integration/graphql";
 import { SearchIcon } from "../icons";
 
 interface LayoutProps {
     title: string;
-    loading?: boolean;
-    error?: string | any;
-    languages?: Language[];
-    currencies?: Currency[];
-    regions?: Region[];
-    getSearchItem?: (name: string) => void;
+    getCountries: (countries: CountriesQuery) => void;
+    getSearchItem: (name: string) => void;
+    getRegion: (name: string) => void;
+    getCurrency: (name: string) => void;
+    getLanguage: (name: string) => void;
     children: FC | ReactElement | ReactElement[] | Element[] | FC[];
+    searchItem: string;
+    region: string;
+    currency: string;
+    language: string;
 }
 
 const Layout: FC<LayoutProps> = ({
     title,
-    loading,
-    error,
     children,
     getSearchItem,
-    languages,
-    currencies,
-    regions,
+    getCountries,
+    getRegion,
+    getCurrency,
+    getLanguage,
+    searchItem,
+    region,
+    currency,
+    language,
 }: LayoutProps) => {
     const { setLoading } = LayoutState.useContainer();
     const { colorMode, toggleColorMode } = useColorMode();
-    const [language, setLanguage] = useState<string>();
-    const [currency, setCurrency] = useState<string>();
-    const [region, setRegion] = useState<string>();
+    const [
+        { data: countries, fetching: lCountries, error: eCountries },
+    ] = useCountriesQuery();
+    const [
+        { data: languages, fetching: lLanguages, error: eLanguages },
+    ] = useLanguagesQuery();
+    const [
+        { data: currencies, fetching: lCurrencies, error: eCurrencies },
+    ] = useCurrenciesQuery();
+    const [
+        { data: regions, fetching: lRegions, error: eRegions },
+    ] = useRegionsQuery();
 
     useEffect(() => {
-        if (loading !== undefined) setLoading(loading);
-    }, [loading]);
+        if (lCountries !== undefined) setLoading(lCountries);
+    }, [lCountries]);
+
+    useEffect(() => {
+        if (countries !== undefined) if (getCountries) getCountries(countries);
+    }, [countries]);
 
     return (
         <Box m={[6, 10]}>
@@ -70,53 +94,74 @@ const Layout: FC<LayoutProps> = ({
             </Flex>
             <HStack my={4}>
                 <Select
+                    defaultValue={language}
                     variant="filled"
-                    placeholder="Idioma"
+                    placeholder="Language"
                     size="sm"
-                    onChange={(e) =>
-                        /* setLanguage(e.target.value) */ console.log(e)
-                    }
+                    onChange={(e) => getLanguage(e.target.value)}
                     value={language}
-                />
+                >
+                    {!eLanguages &&
+                        !!languages &&
+                        languages.Language.map((lang) => (
+                            <option key={lang._id} value={lang._id}>
+                                {lang.name} | {lang.nativeName}
+                            </option>
+                        ))}
+                </Select>
                 <Select
+                    defaultValue={currency}
                     variant="filled"
-                    placeholder="Moneda"
+                    placeholder="Currency"
                     size="sm"
-                    onChange={(e) =>
-                        /* setCurrency(e.target.value) */ console.log(e)
-                    }
+                    onChange={(e) => getCurrency(e.target.value)}
                     value={currency}
-                />
+                >
+                    {!eCurrencies &&
+                        !!currencies &&
+                        currencies.Currency.map((curr) => (
+                            <option key={curr._id} value={curr._id}>
+                                {curr.code} {curr.name} ({curr.symbol})
+                            </option>
+                        ))}
+                </Select>
                 <Select
+                    defaultValue={region}
                     variant="filled"
-                    placeholder="Región"
+                    placeholder="Region"
                     size="sm"
-                    onChange={(e) =>
-                        /* setRegion(e.target.value) */ console.log(e)
-                    }
+                    onChange={(e) => getRegion(e.target.value)}
                     value={region}
-                />
+                >
+                    {!eRegions &&
+                        !!regions &&
+                        regions.Region.map((regi) => (
+                            <option key={regi._id} value={regi._id}>
+                                {regi.name}
+                            </option>
+                        ))}
+                </Select>
             </HStack>
             <Flex gridColumnGap={4} mb={6}>
                 <IconButton
                     icon={<SearchIcon />}
-                    isLoading={loading}
+                    isLoading={lCountries}
                     colorScheme="blue"
                     aria-label="button"
                 />
                 <InputGroup>
                     <Input
+                        defaultValue={searchItem}
                         px={4}
                         type="text"
                         placeholder="Search country"
                         onChange={(e) => getSearchItem(e.target.value)}
+                        value={searchItem}
                     />
                 </InputGroup>
             </Flex>
-
-            <Header title={title} />
             <main>{children}</main>
-            <Footer>{error && error.name}</Footer>
+            <Footer>{eCountries && eCountries.name}</Footer>
         </Box>
     );
 };

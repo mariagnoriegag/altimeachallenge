@@ -1328,6 +1328,36 @@ export type CountriesQuery = { __typename?: "Query" } & {
                         flag?: Maybe<
                             { __typename?: "Flag" } & Pick<Flag, "emoji">
                         >;
+                        subregion?: Maybe<
+                            { __typename?: "Subregion" } & {
+                                region?: Maybe<
+                                    { __typename?: "Region" } & Pick<
+                                        Region,
+                                        "_id"
+                                    >
+                                >;
+                            }
+                        >;
+                        officialLanguages?: Maybe<
+                            Array<
+                                Maybe<
+                                    { __typename?: "Language" } & Pick<
+                                        Language,
+                                        "_id"
+                                    >
+                                >
+                            >
+                        >;
+                        currencies?: Maybe<
+                            Array<
+                                Maybe<
+                                    { __typename?: "Currency" } & Pick<
+                                        Currency,
+                                        "_id"
+                                    >
+                                >
+                            >
+                        >;
                     }
             >
         >
@@ -1579,6 +1609,17 @@ export const CountriesDocument = gql`
             alpha2Code
             flag {
                 emoji
+            }
+            subregion {
+                region {
+                    _id
+                }
+            }
+            officialLanguages {
+                _id
+            }
+            currencies {
+                _id
             }
         }
     }

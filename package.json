@@ -1,42 +1,39 @@
 {
-  "name": "altimeachallenge",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "generate": "graphql-codegen",
-    "format": "prettier --write '**/*.{ts,tsx}'",
-    "lint": "eslint --fix '**/*.{ts,tsx}'",
-    "test:unit": "yarn cypress run —- —-spec 'cypress/component/*.spec.tsx'"
-  },
-  "dependencies": {
-    "@chakra-ui/core": "^1.0.0-rc.8",
-    "@chakra-ui/icons": "^1.0.0-next.3",
-    "@chakra-ui/utils": "^1.0.0-next.3",
-    "framer-motion": "^2.9.4",
-    "graphql": "^15.4.0",
-    "graphql-tag": "^2.11.0",
-    "next": "^10.0.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "unstated-next": "^1.1.0",
-    "urql": "^1.11.1"
-  },
-  "devDependencies": {
-    "@graphql-codegen/cli": "1.19.1",
-    "@graphql-codegen/typescript": "^1.17.11",
-    "@graphql-codegen/typescript-operations": "^1.17.9",
-    "@graphql-codegen/typescript-react-apollo": "2.1.1",
-    "@graphql-codegen/typescript-urql": "^2.0.2",
-    "@types/node": "^14.14.6",
-    "@types/react": "^16.9.56",
-    "cypress": "^5.5.0",
-    "cypress-react-unit-test": "^4.16.9",
-    "eslint": "^7.13.0",
-    "eslint-config-airbnb-typescript-prettier": "^3.1.0",
-    "prettier": "^2.1.2",
-    "typescript": "^4.0.5"
-  }
+    "name": "altimeachallenge",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "generate": "graphql-codegen",
+        "format": "prettier --write '**/*.{ts,tsx}'",
+        "lint": "eslint --fix '**/*.{ts,tsx}'"
+    },
+    "dependencies": {
+        "@chakra-ui/core": "^1.0.0-rc.8",
+        "@chakra-ui/icons": "^1.0.0-next.3",
+        "@chakra-ui/utils": "^1.0.0-next.3",
+        "framer-motion": "^2.9.4",
+        "graphql": "^15.4.0",
+        "graphql-tag": "^2.11.0",
+        "next": "^10.0.1",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "unstated-next": "^1.1.0",
+        "urql": "^1.11.1"
+    },
+    "devDependencies": {
+        "@graphql-codegen/cli": "1.19.1",
+        "@graphql-codegen/typescript": "^1.17.11",
+        "@graphql-codegen/typescript-operations": "^1.17.9",
+        "@graphql-codegen/typescript-react-apollo": "2.1.1",
+        "@graphql-codegen/typescript-urql": "^2.0.2",
+        "@types/node": "^14.14.6",
+        "@types/react": "^16.9.56",
+        "eslint": "^7.13.0",
+        "eslint-config-airbnb-typescript-prettier": "^3.1.0",
+        "prettier": "^2.1.2",
+        "typescript": "^4.0.5"
+    }
 }

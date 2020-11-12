@@ -7,5 +7,16 @@ query Countries($alpha2Code: String, $name: String) {
         flag {
             emoji
         }
+        subregion {
+            region {
+                _id
+            }
+        }
+        officialLanguages {
+            _id
+        }
+        currencies {
+            _id
+        }
     }
 }
