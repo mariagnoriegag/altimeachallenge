@@ -4,13 +4,14 @@ import { useRouter } from "next/router";
 import Layout from "../../components/layout";
 import { AltimeaPage } from "../../lib/altimea";
 import { CountriesQuery, useCountryQuery } from "../../integration/graphql";
-import { Box, Text } from "@chakra-ui/core";
+import { Box, Button, Text } from "@chakra-ui/core";
 import Countries from "../../components/Countries";
 import Header from "../../components/Header";
 
 const Country: AltimeaPage = ({
     id,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+    const router = useRouter();
     const [{ data, fetching, error }] = useCountryQuery({
         variables: { id: id },
     });
@@ -57,6 +58,16 @@ const Country: AltimeaPage = ({
                     />
                 )}
                 <Box>
+                    <Button
+                        onClick={() => router.push("")}
+                        variant="outline"
+                        type="button"
+                        my={4}
+                        size="sm"
+                    >
+                        {" "}
+                        &#x2190; Back to all countries list
+                    </Button>
                     <Header
                         title={
                             !data

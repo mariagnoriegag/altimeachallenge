@@ -78,17 +78,16 @@ const Layout: FC<LayoutProps> = ({
         <Box m={[6, 10]}>
             <Head>
                 <title>{title}</title>
-                <link rel="icon" href="/favicon.ico" />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1, shrink-to-fit=no"
                 />
             </Head>
             <Flex justifyContent="space-between" alignItems="flex-end" mb={6}>
-                <Text as="h1" textStyle="h1">
-                    Search countries
+                <Text colorScheme="teal" as="h1" textStyle="h1">
+                    Maria Noriega
                 </Text>
-                <Button onClick={toggleColorMode}>
+                <Button onClick={toggleColorMode} colorScheme="teal">
                     Toggle {colorMode === "light" ? "Dark" : "Light"}
                 </Button>
             </Flex>
@@ -142,11 +141,11 @@ const Layout: FC<LayoutProps> = ({
                         ))}
                 </Select>
             </HStack>
-            <Flex gridColumnGap={4} mb={6}>
+            <Flex gridColumnGap={1} mb={6}>
                 <IconButton
                     icon={<SearchIcon />}
                     isLoading={lCountries}
-                    colorScheme="blue"
+                    colorScheme="gray"
                     aria-label="button"
                 />
                 <InputGroup>
